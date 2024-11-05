@@ -47,7 +47,11 @@ export default class FaqPlugin extends Plugin {
         this.options.items = structuredClone(this.initialItems.filter(e => e.question.toLowerCase().includes(query.toLowerCase()) || e.answer.toLowerCase().includes(query.toLowerCase())))
       }
     } else {
-      this.options.items = structuredClone(this.initialItems)
+      if(this.categorySelectEl.value) {
+        this.options.items = structuredClone(this.initialItems.filter(e => e.category === this.categorySelectEl.value))
+      } else {
+        this.options.items = structuredClone(this.initialItems)
+      }
     }
   
     this.updateDom()    
@@ -98,7 +102,7 @@ export default class FaqPlugin extends Plugin {
 
       this.listEl.append(el)
     })
-    
+
     this._onViewportHasChanged()
   }
 
