@@ -15,10 +15,12 @@
       </div>
       <div class="filter">
         <select name="categories" id="categories">
+          <option selected disabled>Kategorie wählen</option>
           <option value="pumps">Bicycle Mini Pumps</option>
           <option value="tubes">Bicycle Inner Tubes</option>
         </select>
       </div>
+      <button id="cancel">x</button>
     </div>
   
     <div class="items">
@@ -29,10 +31,9 @@
           id="title-{{ loop.index }}"
           data-bs-target="#collapse-{{ loop.index }}"
           aria-expanded="true"
-          aria-controls="collapseFooterHotline"
           role="listitem"
         >
-          {{ item.question|raw }}    
+          {{ item.question|raw }} <span>{{ item.category }}</span>
         </div>
 
         <div id="collapse-{{ loop.index }}"

@@ -2,7 +2,7 @@
   .top {
     display: flex;
     gap: 20px;
-    
+
     .search {
 
     }
@@ -28,6 +28,11 @@
         font-weight: 600;
         padding-top: 20px;
         cursor: pointer;
+
+        span {
+          font-size: 10px;
+          pointer-events: none;
+        }
       }
 
       .faq-content {        

@@ -12,10 +12,12 @@ export default class FaqPlugin extends Plugin {
   }
 
   init() {
+    this.initialItems = this.options.items
     this.searchInputEl = this.el.querySelector('#search-input')
     this.searchBtnEl = this.el.querySelector('#search-btn')
     this.categorySelectEl = this.el.querySelector('#categories')
     this.listEl = this.el.querySelector('.items')
+    this.cancelBtnEl = this.el.querySelector('#cancel')
 
     this._columns = this.el.querySelectorAll(this.options.collapseColumnSelector);
 
@@ -27,16 +29,64 @@ export default class FaqPlugin extends Plugin {
     document.addEventListener('Viewport/hasChanged', this._onViewportHasChanged.bind(this))
 
     this.searchBtnEl.addEventListener('click', this.onSearchBtnClick.bind(this))
+    this.cancelBtnEl.addEventListener('click', this.cancel.bind(this))
+    this.categorySelectEl.addEventListener('change', this.onCategorySelected.bind(this))
   }
 
   onSearchBtnClick() {
     console.log('start search')
     this.search(this.searchInputEl.value)
+  }
+  
+  search(query) {
+    if(query) {
+      this.options.items = structuredClone(this.options.items.filter(e => e.question.toLowerCase().includes(query.toLowerCase()) || e.answer.toLowerCase().includes(query.toLowerCase())))
+    } else {
+      this.options.items = structuredClone(this.initialItems)
+    }
+  
+    this.updateDom()
+    
     console.log(this.options)
+    this._onViewportHasChanged()
   }
 
-  search(query) {
-    console.log(query)
+  updateDom() {
+    this.listEl.innerHTML = ''
+    this.options.items.forEach((item, i) => {
+      const el = document.createElement('div')
+      el.classList.add('accordion')
+      el.classList.add('item')
+      el.innerHTML = `
+        <div
+          class="faq-headline faq-trigger"
+          id="title-${i}"
+          data-bs-target="#collapse-${i}"
+          aria-expanded="true"
+          role="listitem"
+        >
+          ${item.question} <span>${item.category}</span>
+        </div>
+
+        <div id="collapse-${i}"
+          class="faq-content collapse"
+          aria-labelledby="title-${i}"
+          role="listitem"
+        >
+          <div class="faq-content-inner">
+              ${item.answer}
+          </div>
+        </div>
+      `
+
+      this.listEl.append(el)
+    })
+  }
+
+  onCategorySelected(evt) {
+    console.log('cat selected', evt.target.value)
+    this.options.items = structuredClone(this.initialItems.filter(e => e.category.toLowerCase() === evt.target.value.toLowerCase()))
+    this.updateDom()
   }
 
   _onViewportHasChanged() {
@@ -83,5 +133,11 @@ export default class FaqPlugin extends Plugin {
     });
 
     this.$emitter.publish('onClickCollapseTrigger');
+  }
+
+  cancel() {
+    this.categorySelectEl.value = ''
+    this.options.items = structuredClone(this.initialItems)
+    this.updateDom()
   }
 }
