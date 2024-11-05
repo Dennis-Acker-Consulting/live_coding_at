@@ -1,0 +1,42 @@
+.alphatrail-faq {
+  .top {
+    display: flex;
+    gap: 20px;
+    
+    .search {
+
+    }
+
+    .filter {
+
+    }
+  }
+
+  .items {
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+
+    .item {
+      padding-bottom: 20px;
+      
+      &:not(:last-child) {
+        border-bottom: 1px solid #ccc;
+      }
+
+      .faq-headline {
+        font-weight: 600;
+        padding-top: 20px;
+        cursor: pointer;
+      }
+
+      .faq-content {        
+        p {
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+}

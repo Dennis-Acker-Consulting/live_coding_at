@@ -23,10 +23,28 @@
   
     <div class="items">
       {% for item in element.config.items.value %}
-        <div class="item">
-          <div class="title">{{ item.question|raw }}</div>
-          <div class="content">{{ item.answer|raw }}</div>
+      <div class="accordion item" role="list">
+        <div
+          class="faq-headline faq-trigger"
+          id="title-{{ loop.index }}"
+          data-bs-target="#collapse-{{ loop.index }}"
+          aria-expanded="true"
+          aria-controls="collapseFooterHotline"
+          role="listitem"
+        >
+          {{ item.question|raw }}    
         </div>
+
+        <div id="collapse-{{ loop.index }}"
+          class="faq-content collapse"
+          aria-labelledby="title-{{ loop.index }}"
+          role="listitem"
+        >
+          <div class="faq-content-inner">
+              {{ item.answer|raw }}
+          </div>
+        </div>
+      </div>
       {% endfor %}
     </div>
   </div>
