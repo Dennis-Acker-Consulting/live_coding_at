@@ -32,7 +32,7 @@ export default class FaqPlugin extends Plugin {
   onSearchBtnClick() {
     console.log('start search')
     this.search(this.searchInputEl.value)
-    console.log(this.options.items)
+    console.log(this.options)
   }
 
   search(query) {
