@@ -19,7 +19,7 @@ export default class FaqPlugin extends Plugin {
     this.listEl = this.el.querySelector('.items')
     this.cancelBtnEl = this.el.querySelector('#cancel')
 
-    this._columns = this.el.querySelectorAll(this.options.collapseColumnSelector);
+    this._columns = this.el.querySelectorAll(this.options.collapseColumnSelector)
 
     this.initListeners()
   }
@@ -90,6 +90,7 @@ export default class FaqPlugin extends Plugin {
   }
 
   _onViewportHasChanged() {
+    this._columns = this.el.querySelectorAll(this.options.collapseColumnSelector)
     const event = 'click'
 
     Iterator.iterate(this._columns, column => {
