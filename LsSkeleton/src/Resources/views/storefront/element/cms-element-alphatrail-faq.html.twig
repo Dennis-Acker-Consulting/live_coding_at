@@ -10,17 +10,17 @@
   >
     <div class="top">
       <div class="faq-search">
-        <input id="search-input" type="text" placeholder="Suche" />
-        <button id="search-btn" type="button">Suche</button>
+        <input id="search-input" type="text" placeholder="Suche" class="form-control" />
+        <button id="search-btn" type="button" class="btn btn-primary">Suche</button>
       </div>
       <div class="filter">
-        <select name="categories" id="categories">
-          <option selected disabled>Kategorie wählen</option>
+        <select name="categories" id="categories" class="form-control">
+          <option selected value="">Alle Kategorien</option>
           <option value="pumps">Bicycle Mini Pumps</option>
           <option value="tubes">Bicycle Inner Tubes</option>
         </select>
       </div>
-      <button id="cancel">x</button>
+      {# <button id="cancel">x</button> #}
     </div>
   
     <div class="items">
@@ -33,7 +33,18 @@
           aria-expanded="true"
           role="listitem"
         >
-          {{ item.question|raw }} <span>{{ item.category }}</span>
+          <div class="title">
+            <span>{{ item.category }}</span>
+            <div>{{ item.question|raw }}</div>
+          </div>
+          <div class="product-row-toggle">
+            <span class="toggle-plus-icon">
+              {% sw_icon 'plus' %}
+            </span>
+            <span class="toggle-minus-icon">
+              {% sw_icon 'minus' %}
+            </span>
+          </div>
         </div>
 
         <div id="collapse-{{ loop.index }}"
