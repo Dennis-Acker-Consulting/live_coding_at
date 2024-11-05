@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-    sw6_deepl:
+    sw6_dev:
       image: dockware/dev:6.6.7.1
       container_name: sw6_dev
       ports:
