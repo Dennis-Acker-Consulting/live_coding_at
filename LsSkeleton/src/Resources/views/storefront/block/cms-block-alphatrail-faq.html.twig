@@ -1,0 +1,9 @@
+{% block alphatrail_faq %}
+  {% set element = block.slots.getSlot('items') %}
+
+  <div class="col-12" data-cms-element-id="{{ element.id }}">
+    {% block alphatrail_faq_inner %}
+      {% sw_include "@Storefront/storefront/element/cms-element-" ~ element.type ~ ".html.twig" ignore missing %}
+    {% endblock %}
+  </div>
+{% endblock %}

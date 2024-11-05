@@ -1,0 +1,79 @@
+<div class="sw-cms-el-config-alphatrail-faq">
+  <sw-tabs default-item="content">
+    <template #default="{ active }" >
+      <sw-tabs-item
+        title="Elemente"
+        name="content"
+        :active-tab="active"
+      >
+        Elemente
+      </sw-tabs-item>
+      <sw-tabs-item
+        :title="$tc('sw-cms.elements.general.config.tab.settings')"
+        name="settings"
+        :active-tab="active"
+      >
+        {{ $tc('sw-cms.elements.general.config.tab.settings') }}
+      </sw-tabs-item>
+    </template>
+
+    <template #content="{ active }">
+      <sw-container v-if="active === 'content'">
+        <sw-card title="FAQ">
+          <template v-slot:header-right>
+            <sw-button @click.native="openFaqModal" variant="primary" :block="true">
+              Artikel hinzufügen
+            </sw-button>
+          </template>
+
+          <div class="items">
+            <div v-for="(item, i) in element.config.items.value" :key="item.id" class="item">
+              <div class="name">{{ item.question }}</div>
+              <sw-button variant="ghost-default" size="small" @click.native="editFaq(item)">Bearbeiten</sw-button>
+              <sw-button variant="ghost-danger" size="small" @click.native="deleteFaq(i)">Löschen</sw-button>
+            </div>
+          </div>
+        </sw-card>
+      </sw-container>
+    </template>
+  </sw-tabs>
+
+  <sw-modal
+    v-if="faqModalIsOpen"
+    :title="currentFaq ? 'Artikel bearbeiten' : 'Neuen Artikel erstellen'"
+    @modal-close="closeFaqModal"
+  >
+    <sw-text-field
+      v-model:value="faqForm.id"
+      label="ID"
+    >
+    </sw-text-field>
+    <sw-text-editor
+      v-model:value="faqForm.question"
+      label="Frage">
+    </sw-text-editor>
+
+    <sw-text-editor
+      v-model:value="faqForm.answer"
+      label="Antwort">
+    </sw-text-editor>
+
+    <sw-select-field
+      placeholder="Kategorie wählen"
+      label="Kategorie"
+      v-model:value="faqForm.category"
+    >
+      <option value="pumps">Bicycle Mini Pumps</option>
+      <option value="tubes">Bicycle Inner Tubes</option>
+    </sw-select-field>
+
+    <sw-button
+      variant="primary"
+      :block="true"
+      @click.native="saveFaq"
+    >
+      {{ currentFaq ? 'Aktualisieren' : 'Hinzufügen' }}
+    </sw-button
+   >
+  </sw-modal>
+</div>

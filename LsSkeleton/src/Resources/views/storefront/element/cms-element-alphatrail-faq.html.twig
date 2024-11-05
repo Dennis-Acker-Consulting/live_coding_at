@@ -1,0 +1,33 @@
+{% block alphatrail_faq_element %}
+  {% set faqOptions = {
+    items: element.config.items.value
+  } %}
+  
+  <div
+    class="alphatrail-faq"
+    data-faq="true"
+    data-faq-options="{{ faqOptions|json_encode }}"
+  >
+    <div class="top">
+      <div class="faq-search">
+        <input id="search-input" type="text" placeholder="Suche" />
+        <button id="search-btn" type="button">Suche</button>
+      </div>
+      <div class="filter">
+        <select name="categories" id="categories">
+          <option value="pumps">Bicycle Mini Pumps</option>
+          <option value="tubes">Bicycle Inner Tubes</option>
+        </select>
+      </div>
+    </div>
+  
+    <div class="items">
+      {% for item in element.config.items.value %}
+        <div class="item">
+          <div class="title">{{ item.question|raw }}</div>
+          <div class="content">{{ item.answer|raw }}</div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
