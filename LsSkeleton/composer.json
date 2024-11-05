@@ -1,0 +1,42 @@
+{
+  "name": "lucksmith/skeleton",
+  "description": "...",
+  "version": "v1.0.0",
+  "type": "shopware-platform-plugin",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "lucksmith.de",
+      "role": "Manufacturer"
+    }
+  ],
+  "require": {
+    "shopware/core": "^6.6.7.0",
+    "shopware/administration": "*"
+  },
+  "extra": {
+    "shopware-plugin-class": "LsSkeleton\\LsSkeleton",
+    "copyright": "(c) by Lucksmith e.K.",
+    "label": {
+      "de-DE": "Lucksmith Skeleton",
+      "en-GB": "Lucksmith Skeleton"
+    },
+    "description": {
+      "de-DE": "...",
+      "en-GB": "..."
+    },
+    "manufacturerLink": {
+      "de-DE": "https://lucksmith.de/",
+      "en-GB": "https://lucksmith.de/"
+    },
+    "supportLink": {
+      "de-DE": "https://lucksmith.de/",
+      "en-GB": "https://lucksmith.de/"
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "LsSkeleton\\": "src/"
+    }
+  }
+}

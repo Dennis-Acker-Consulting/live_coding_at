@@ -1,0 +1,5 @@
+1. cd Docker
+2- docker-compose up -d
+3. SSH -> localhost "dockware:dockware"
+4. make watch-storefront für -> localhost:9998
+5. make watch-admin für -> localhost:8888
